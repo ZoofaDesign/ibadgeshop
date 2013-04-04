@@ -1,0 +1,19 @@
+/* 
+    Document   : bestel
+    Created on : 2-apr-2013, 19:26:03
+    Author     : Yorick
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+.center > form {
+    margin: 0 auto;
+    width: 300px;
+    padding: 50px;
+}
+
+
