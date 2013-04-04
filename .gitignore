@@ -12,6 +12,7 @@
 /build
 /dist
 /tags
+/app/Config/database.php
 
 # OS generated files #
 ######################
@@ -24,4 +25,3 @@ Icon?
 ehthumbs.db
 Thumbs.db
 /nbproject
-/app/Config/database.php
