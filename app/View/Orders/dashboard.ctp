@@ -1,19 +1,15 @@
 <div class="span3">
-    <div class="sidebar">
 	<h3><?php echo __('Actions'); ?></h3>
-	
-	<ul class="col-nav span3">
+	<ul>
 		<li><?php echo $this->Html->link(__('New Order'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
 	</ul>
-    </div>
 </div>
 <div class="span9">
 	<h2><?php echo __('Orders'); ?></h2>
-	<table class="table" cellpadding="0" cellspacing="0">
+	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
+			<th><?php echo $this->Paginator->sort('user_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('status'); ?></th>
 			<th><?php echo $this->Paginator->sort('price'); ?></th>
 			<th><?php echo $this->Paginator->sort('format'); ?></th>
@@ -21,10 +17,11 @@
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php foreach ($orders as $order): ?>
-	<tr>
+	<?php //print_r($order);  ?>
+        <tr>
 		<td><?php echo h($order['Order']['id']); ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link($order['User']['Customer']['naam'], array('controller' => 'customers', 'action' => 'view', $order['User']['Customer']['klant_id'])); ?>
+			<?php echo $this->Html->link($order['Customer']['naam'], array('controller' => 'customer', 'action' => 'view', $order['Customer']['klant_id'])); ?>
 		</td>
 		<td><?php echo h($order['Order']['status']); ?>&nbsp;</td>
 		<td><?php echo h($order['Order']['price']); ?>&nbsp;</td>
@@ -52,3 +49,4 @@
 	?>
 	</div>
 </div>
+
