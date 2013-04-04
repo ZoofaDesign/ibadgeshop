@@ -251,7 +251,7 @@ Copyright © Europabank NV 2011
             $options = array('conditions' => array('Order.' . $this->Order->primaryKey => $id));
             $this->request->data = $this->Order->find('first', $options);
         }
-        $users = $this->Order->User->find('list');
+        $users = $this->Order->Customer->find('list');
         $this->set(compact('users'));
     }
 
