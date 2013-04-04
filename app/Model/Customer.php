@@ -151,10 +151,10 @@ class Customer extends AppModel {
  * @var array
  */
         
-        public $belongsTo = array(
-                'User' => array(
-                        'className' => 'Users.User',
-                        'foreignKey' => 'user_id',
+        public $hasMany = array(
+                'Order' => array(
+                        'className' => 'Order',
+                        'foreignKey' => 'customer_id',
                 )
         );
 }

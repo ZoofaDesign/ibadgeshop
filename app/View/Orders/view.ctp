@@ -1,12 +1,12 @@
 <div class="span3">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('Edit Order'), array('action' => 'edit', $order['Order']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Order'), array('action' => 'delete', $order['Order']['id']), null, __('Are you sure you want to delete # %s?', $order['Order']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Orders'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Order'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('Bestelling aanpassen'), array('action' => 'edit', $order['Order']['id'])); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Verwijder Bestelling'), array('action' => 'delete', $order['Order']['id']), null, __('Are you sure you want to delete # %s?', $order['Order']['id'])); ?> </li>
+		<li><?php echo $this->Html->link(__('Alle bestellingen'), array('action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('Nieuwe Bestelling'), array('action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('Alle Klanten'), array('controller' => 'users', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('Nieuwe Klant'), array('controller' => 'users', 'action' => 'add')); ?> </li>
 	</ul>
 </div>
 <div class="span9">
@@ -19,7 +19,7 @@
 		</dd>
 		<dt><?php echo __('User'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($order['User']['id'], array('controller' => 'users', 'action' => 'view', $order['User']['id'])); ?>
+			<?php echo $this->Html->link($order['Customer']['klant_id'], array('controller' => 'customer', 'action' => 'view', $order['Customer']['klant_id'])); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Status'); ?></dt>

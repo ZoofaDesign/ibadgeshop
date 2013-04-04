@@ -21,7 +21,7 @@
         <tr>
 		<td><?php echo h($order['Order']['id']); ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link($order['User']['username'], array('controller' => 'users', 'action' => 'view', $order['User']['id'])); ?>
+			<?php echo $this->Html->link($order['Customer']['naam'], array('controller' => 'customer', 'action' => 'view', $order['Customer']['klant_id'])); ?>
 		</td>
 		<td><?php echo h($order['Order']['status']); ?>&nbsp;</td>
 		<td><?php echo h($order['Order']['price']); ?>&nbsp;</td>

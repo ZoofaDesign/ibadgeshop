@@ -19,20 +19,20 @@
                         <input name="breedte" type="text" placeholder="Breedte..">
                         <label>Diameter</label>
                         <input name="diameter" type="text" placeholder="Diameter..">
-                        <?php echo $this->Form->input('Order.User.Customer.naam',array('placeholder' => 'Naam & Voornaam')); ?>
-                        <?php echo $this->Form->input('Order.User.Customer.groepsnaam',array('placeholder' => 'Bedrijfs- of groepsnaam..')); ?>
-                        <?php echo $this->Form->input('Order.User.Customer.straat',array('placeholder' => 'Straat..','label' => 'Straat, nr, bus')); ?>
-                        <?php echo $this->Form->input('Order.User.Customer.nr', array('label' => '','class' => 'span2')); ?>
-                        <?php echo $this->Form->input('Order.User.Customer.bus', array('label' => '','class' => 'span1')); ?>
-                        <?php echo $this->Form->input('Order.User.Customer.postcode',array('placeholder' => 'Postcode..')); ?>
-                        <?php echo $this->Form->input('Order.User.Customer.tel',array('placeholder' => 'Telefoon')); ?>
-                        <?php echo $this->Form->input('Order.User.Customer.email',array('placeholder' => 'Email')); ?>
+                        <?php echo $this->Form->input('Order.Customer.naam',array('placeholder' => 'Naam & Voornaam')); ?>
+                        <?php echo $this->Form->input('Order.Customer.groepsnaam',array('placeholder' => 'Bedrijfs- of groepsnaam..')); ?>
+                        <?php echo $this->Form->input('Order.Customer.straat',array('placeholder' => 'Straat..','label' => 'Straat, nr, bus')); ?>
+                        <?php echo $this->Form->input('Order.Customer.nr', array('label' => '','class' => 'span2')); ?>
+                        <?php echo $this->Form->input('Order.Customer.bus', array('label' => '','class' => 'span1')); ?>
+                        <?php echo $this->Form->input('Order.Customer.postcode',array('placeholder' => 'Postcode..')); ?>
+                        <?php echo $this->Form->input('Order.Customer.tel',array('placeholder' => 'Telefoon')); ?>
+                        <?php echo $this->Form->input('Order.Customer.email',array('placeholder' => 'Email')); ?>
                         <label>Land</label>
                         <?php 
                         $options = array('BE' => 'België', 'NL' => 'Nederland');
                         echo $this->Form->select('land', $options, array('escape' => false));
                         ?>
-                        <?php echo $this->Form->input('Order.User.Customer.btw_nr',array('label' => 'BTW-nr. (indien van toepassing)','placeholder' => 'Btw-nr...')); ?>
+                        <?php echo $this->Form->input('Order.Customer.btw_nr',array('label' => 'BTW-nr. (indien van toepassing)','placeholder' => 'Btw-nr...')); ?>
                         <label class="checkbox">
                             <input type="checkbox" value="voorwaarden" required>
                             <a href="#">Voorwaarden</a>

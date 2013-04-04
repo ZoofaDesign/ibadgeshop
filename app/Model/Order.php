@@ -73,15 +73,16 @@ class Order extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'User' => array(
-			'className' => 'Users.User',
-			'foreignKey' => 'user_id',
+		'Customer' => array(
+			'className' => 'Customer',
+			'foreignKey' => 'customer_id',
 		)
 	);
         
         public $hasMany = array(
                 'Design' => array(
                     'className'  => 'Design',
+                    'foreignKey' => 'order_id'
                     )
         );
         
