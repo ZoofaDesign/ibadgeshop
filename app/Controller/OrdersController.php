@@ -38,28 +38,31 @@ class OrdersController extends AppController {
         if ($this->request->is('post'))
         {
             $this->Order->create();
-
-            $this->request->data['Order']['price'] = 10;
-            $this->request->data['Order']['sizes'] = '5x10';
-
-            $data = array(
-                'User' => array('email' => $this->request->data['Order']['User']['email']),
-                'User' => array(
-                    array('Customer' => array(
-                            'naam' => 'mad',
-                            'groespnaam' => 'coder',
-                        )),
-                ),
-            );
-            if ($this->Order->saveAssociated($this->request->data))
+            $customer = $this->Order->Customer->create();
+            $customer = $this->Order->Customer->save($this->request->data);
+            
+            if (!empty($customer))
             {
-                $this->Session->setFlash(__('Uw bestelling is succesvol geplaatst'));
-                $this->redirect(array('action' => 'view', $this->Order->id));
+                
+                $this->request->data['Order']['price'] = 350.4;
+                $this->request->data['Order']['sizes'] = '5x10';
+                $this->request->data['Order']['aantal'] = $customer['Order']['aantal'];
+                $this->request->data['Order']['format'] = $customer['Order']['format'];
+                $this->request->data['Order']['customer_id'] = $customer['Customer']['klant_id'];
+                
+                if ($this->Order->save($this->request->data))
+                {
+                    $this->Session->setFlash(__('Uw bestelling is succesvol geplaatst'));
+                    $this->redirect(array('action' => 'view', $this->Order->id));
+                }
+                else
+                {
+                    $this->Session->setFlash(__('The order could not be saved. Please, try again.'));
+                }
             }
-            else
-            {
-                $this->Session->setFlash(__('The order could not be saved. Please, try again.'));
-            }
+            
+
+
 
             //$this->addCustomer();
             //User aanmaken

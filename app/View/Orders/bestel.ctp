@@ -9,30 +9,28 @@
                         <?php 
                         $options = array('rond' => 'Rond', 'rechthoek' => 'Rechthoek','anders' => 'Anders');
                         $attributes = array('legend' => false);
-                        echo $this->Form->radio('format', $options, $attributes);
+                        echo $this->Form->radio('Order.format', $options, $attributes);
                         ?>
-                        <?php echo $this->Form->input('Order.',array('placeholder' => 'Aantal..')); ?>
+                        <?php echo $this->Form->input('Order.aantal',array('placeholder' => 'Aantal..')); ?>
 
-                        <label>Hoogte</label>
-                        <input name="hoogte" type="text" placeholder="Hoogte..">
-                        <label>Breedte</label>
-                        <input name="breedte" type="text" placeholder="Breedte..">
-                        <label>Diameter</label>
-                        <input name="diameter" type="text" placeholder="Diameter..">
-                        <?php echo $this->Form->input('Order.Customer.naam',array('placeholder' => 'Naam & Voornaam')); ?>
-                        <?php echo $this->Form->input('Order.Customer.groepsnaam',array('placeholder' => 'Bedrijfs- of groepsnaam..')); ?>
-                        <?php echo $this->Form->input('Order.Customer.straat',array('placeholder' => 'Straat..','label' => 'Straat, nr, bus')); ?>
-                        <?php echo $this->Form->input('Order.Customer.nr', array('label' => '','class' => 'span2')); ?>
-                        <?php echo $this->Form->input('Order.Customer.bus', array('label' => '','class' => 'span1')); ?>
-                        <?php echo $this->Form->input('Order.Customer.postcode',array('placeholder' => 'Postcode..')); ?>
-                        <?php echo $this->Form->input('Order.Customer.tel',array('placeholder' => 'Telefoon')); ?>
-                        <?php echo $this->Form->input('Order.Customer.email',array('placeholder' => 'Email')); ?>
+                         <?php echo $this->Form->input('Order.hoogte',array('label' => 'Hoogte','placeholder' => 'Hoogte')); ?>
+                         <?php echo $this->Form->input('Order.breedte',array('label' => 'Breedte','placeholder' => 'Breedte')); ?>
+                         <?php echo $this->Form->input('Order.diameter',array('label' => 'Diameter','placeholder' => 'Diameter')); ?>
+
+                        <?php echo $this->Form->input('Customer.naam',array('placeholder' => 'Naam & Voornaam')); ?>
+                        <?php echo $this->Form->input('Customer.groepsnaam',array('placeholder' => 'Bedrijfs- of groepsnaam..')); ?>
+                        <?php echo $this->Form->input('Customer.straat',array('placeholder' => 'Straat..','label' => 'Straat, nr, bus')); ?>
+                        <?php echo $this->Form->input('Customer.nr', array('label' => '','class' => 'span2')); ?>
+                        <?php echo $this->Form->input('Customer.bus', array('label' => '','class' => 'span1')); ?>
+                        <?php echo $this->Form->input('Customer.postcode',array('placeholder' => 'Postcode..')); ?>
+                        <?php echo $this->Form->input('Customer.telefoon',array('placeholder' => 'Telefoon')); ?>
+                        <?php echo $this->Form->input('Customer.e-mail',array('placeholder' => 'Email')); ?>
                         <label>Land</label>
                         <?php 
                         $options = array('BE' => 'België', 'NL' => 'Nederland');
-                        echo $this->Form->select('land', $options, array('escape' => false));
+                        echo $this->Form->select('Customer.land', $options, array('escape' => false));
                         ?>
-                        <?php echo $this->Form->input('Order.Customer.btw_nr',array('label' => 'BTW-nr. (indien van toepassing)','placeholder' => 'Btw-nr...')); ?>
+                        <?php echo $this->Form->input('Customer.btw_nr',array('label' => 'BTW-nr. (indien van toepassing)','placeholder' => 'Btw-nr...')); ?>
                         <label class="checkbox">
                             <input type="checkbox" value="voorwaarden" required>
                             <a href="#">Voorwaarden</a>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Machine: 127.0.0.1
--- Genereertijd: 04 apr 2013 om 22:20
+-- Genereertijd: 05 apr 2013 om 00:29
 -- Serverversie: 5.5.27
 -- PHP-versie: 5.4.7
 
@@ -28,7 +28,6 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `customers` (
   `klant_id` int(11) NOT NULL AUTO_INCREMENT,
-  `order_id` int(11) NOT NULL,
   `user_id` varchar(36) NOT NULL,
   `naam` varchar(50) NOT NULL,
   `groepsnaam` varchar(80) NOT NULL DEFAULT 'null',
@@ -41,15 +40,19 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `telefoon` varchar(20) NOT NULL,
   `e-mail` varchar(50) NOT NULL,
   `btw_nr` varchar(20) NOT NULL DEFAULT 'null',
-  PRIMARY KEY (`klant_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  PRIMARY KEY (`klant_id`),
+  UNIQUE KEY `e-mail` (`e-mail`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
 --
 -- Gegevens worden uitgevoerd voor tabel `customers`
 --
 
-INSERT INTO `customers` (`klant_id`, `order_id`, `user_id`, `naam`, `groepsnaam`, `straat`, `nr`, `bus`, `postcode`, `gemeente`, `land`, `telefoon`, `e-mail`, `btw_nr`) VALUES
-(1, 1, '513b737c-8540-4f22-8d73-5620766e9db1', 'Voornaam Naam', 'Chiro A', 'Kerkstraat', '25', 'null', 9000, '9000', 'be', '0472730771', 'yorick@horrie.be', 'null');
+INSERT INTO `customers` (`klant_id`, `user_id`, `naam`, `groepsnaam`, `straat`, `nr`, `bus`, `postcode`, `gemeente`, `land`, `telefoon`, `e-mail`, `btw_nr`) VALUES
+(1, '513b737c-8540-4f22-8d73-5620766e9db1', 'Voornaam Naam', 'Chiro A', 'Kerkstraat', '25', 'null', 9000, '9000', 'be', '0472730771', 'yorick@horrie.be', 'null'),
+(22, '', 'sdsd', 'qsd', 'sdqd', '25', '4', 9000, '', '', '', '', '0'),
+(23, '', 'Yorick Horrie', '', 'Vinkenlaan ', '35', '', 9000, '', 'BE', '0', 'test@example.com', ''),
+(24, '', 'Yorick Horrie', '', 'Vinkenlaan ', '35', '', 9000, '', 'BE', '0', 'test@examdple.com', '');
 
 -- --------------------------------------------------------
 
@@ -96,14 +99,17 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `type` varchar(20) NOT NULL DEFAULT 'order',
   `code` varchar(80) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=41 ;
 
 --
 -- Gegevens worden uitgevoerd voor tabel `orders`
 --
 
 INSERT INTO `orders` (`id`, `status`, `price`, `format`, `sizes`, `aantal`, `created`, `modified`, `finished`, `customer_id`, `type`, `code`) VALUES
-(1, 1, 5225, 'Rechthoekig', '25x60', 0, '2013-03-10 19:14:08', '2013-03-10 19:14:08', '2013-03-10 19:13:00', '1', 'order', '');
+(1, 1, 5225, 'Rechthoekig', '25x60', 0, '2013-03-10 19:14:08', '2013-03-10 19:14:08', '2013-03-10 19:13:00', '1', 'order', ''),
+(38, 1, 350, 'rond', '5x10', 50, '2013-04-05 00:10:10', '2013-04-05 00:10:10', '0000-00-00 00:00:00', '22', 'order', ''),
+(39, 1, 350, 'rond', '5x10', 60, '2013-04-05 00:22:34', '2013-04-05 00:22:34', '0000-00-00 00:00:00', '23', 'order', ''),
+(40, 1, 350, 'rond', '5x10', 60, '2013-04-05 00:24:05', '2013-04-05 00:24:05', '0000-00-00 00:00:00', '24', 'order', '');
 
 -- --------------------------------------------------------
 

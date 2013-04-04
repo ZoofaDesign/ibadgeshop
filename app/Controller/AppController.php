@@ -34,7 +34,7 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 
-    public $components = array('Cookie');
+    public $components = array('Cookie','Session','DebugKit.Toolbar');
 
     public function beforeFilter()
     {
