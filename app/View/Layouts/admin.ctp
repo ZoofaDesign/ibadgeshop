@@ -56,19 +56,17 @@ $defaultTitle = __d('ibadge_title', 'Ibadge - D&eacute; nummer 1 in geborduurde 
     <?php echo $this->element("menu");  ?>
     <div class="page">
         <div class="page-container">
-            <div class="container">
-                <div class="row">
+            <div class="container-fluid">
 			<?php echo $this->Session->flash(); ?>
 
 			<?php // Spans toevoegen per view
                         echo $this->fetch('content'); ?>
-                </div>
             </div>
         </div>
     </div>
     <footer>
-        <div class="container">
-            <div class="row">
+        <div class="container-fluid">
+            <div class="row-fluid">
                  <?php echo $this->element('sql_dump'); ?>
                 <?php echo $this->Js->writeBuffer(); ?>
                 <?php //print Configure::version(); ?>

@@ -54,8 +54,8 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 </head>
 <body>
 		<div id="in-nav">
-                    <div class="container">
-                        <div class="row">
+                    <div class="container-fluid">
+                        <div class="row-fluid">
                             <div class="span12">
                                 <ul class="pull-right">
                                     <li><a href="#">Link1</a></li>
@@ -68,8 +68,8 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
                     </div>
 		</div>
 
-            <div class="container">
-                <div class="row">
+            <div class="container-fluid">
+                <div class="row-fluid">
 			<?php echo $this->Session->flash(); ?>
 TEST
 			<?php // Spans toevoegen per view
@@ -77,8 +77,8 @@ TEST
                 </div>
             </div>
     <footer>
-        <div class="container">
-            <div class ="row">
+        <div class="container-fluid">
+            <div class ="row-fluid">
                 <div class="span12">
 			<?php echo $this->Html->link(
 					$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
@@ -89,7 +89,7 @@ TEST
                     
                 </div>
             </div>
-            <div class="row">
+            <div class="row-fluid">
                  <?php echo $this->element('sql_dump'); ?>
                 <?php echo $this->Js->writeBuffer(); ?>
                 <?php print Configure::version(); ?>

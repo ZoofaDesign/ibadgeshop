@@ -45,13 +45,11 @@ $defaultTitle = __d('ibadge_title', 'Ibadge - D&eacute; nummer 1 in geborduurde 
 <body>
     <div class="page">
         <div class="page-container">
-            <div class="container">
-                <div class="row">
+            <div class="container-fluid">
 			<?php echo $this->Session->flash(); ?>
 
 			<?php // Spans toevoegen per view
                         echo $this->fetch('content'); ?>
-                </div>
             </div>
         </div>
     </div>

@@ -1,3 +1,4 @@
+<div class="row-fluid">
 <div class="span12 center">
 <form name="bestel" action="orders/bestel" method="post" class="form">
                         <input type="file" name="datafile" size="40">
@@ -41,4 +42,8 @@
                         </div>
 
                     </form>
+</div>
+</div>
+<div class="row-fluid">
+    <div class="span12"><?php //Uw code hier dan ?></div>
 </div>

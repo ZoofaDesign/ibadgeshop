@@ -35,8 +35,8 @@ A:HOVER { text-decoration: underline; color:#44E }
 <body>
     <div class="page">
             <div class="page-container">
-                <div class="container">
-                    <div class="row">
+                <div class="container-fluid">
+                    <div class="row-fluid">
                         <div class="span12">
                             <a href="<?php echo $url; ?>"><?php echo $message; ?></a>
                         </div>
