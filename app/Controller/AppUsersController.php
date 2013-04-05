@@ -33,7 +33,7 @@ class AppUserController extends UsersController {
         
         public function beforeFilter() {
             parent::beforeFilter();
-             $this->User = ClassRegistry::init('User');
+             $this->User = ClassRegistry::init('AppUser');
         }
         
         public function view(){

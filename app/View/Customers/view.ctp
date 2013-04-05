@@ -18,11 +18,6 @@
 			&nbsp;
                     <?php endforeach; ?>
 		</dd>
-		<dt><?php echo __('User'); ?></dt>
-		<dd>
-			<?php echo $this->Html->link($customer['User']['username'], array('controller' => 'users', 'action' => 'view', $customer['User']['id'])); ?>
-			&nbsp;
-		</dd>
 		<dt><?php echo __('Naam'); ?></dt>
 		<dd>
 			<?php echo h($customer['Customer']['naam']); ?>

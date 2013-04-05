@@ -48,7 +48,7 @@ class CustomersController extends AppController {
             $this->request->data['Order']['sizes'] = '5x10';
             if (!empty($customer))
             {
-                $this->request->data['Order']['customer_id'] = $customer->klant_id;
+                //$this->request->data['Order']['customer_id'] = $customer[''];
                 if ($this->Customer->Order->save($this->request->data))
                 {
                     $this->Session->setFlash(__('Uw bestelling is succesvol geplaatst'));

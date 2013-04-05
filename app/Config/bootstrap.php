@@ -71,7 +71,6 @@ Cache::config('default', array('engine' => 'File'));
   CakePlugin::load('DebugKit'); //Loads a single plugin named DebugKit
  *
  */
-CakePlugin::load('DebugKit');
 CakePlugin::load('Users', array('routes' => true));
 CakePlugin::load('Search');
 CakePlugin::load('Utils');

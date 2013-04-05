@@ -53,29 +53,15 @@ class OrdersController extends AppController {
                 if ($this->Order->save($this->request->data))
                 {
                     $this->Session->setFlash(__('Uw bestelling is succesvol geplaatst'));
-                    $this->redirect(array('action' => 'view', $this->Order->id));
+                    $this->redirect(array('action' => 'checkout', $this->Order->id));
                 }
                 else
                 {
                     $this->Session->setFlash(__('The order could not be saved. Please, try again.'));
                 }
             }
-            
-
-
-
-            //$this->addCustomer();
-            //User aanmaken
-            //$this->request->data['User']['tos'] = true;
-            //$this->request->data['User']['email_verified'] = true;
-            //if ($this->User->add($this->request->data)) {
-            //	$this->Session->setFlash(__d('users', 'The User has been saved'));
-            //	$this->redirect(array('action' => 'complete'));
-            //}
-            //$this->set('roles', Configure::read('Users.roles'));     
+ 
         }
-        //$users = $this->User;
-        //$this->set(compact('users'));
     }
 
     private function addCustomer()
@@ -85,6 +71,12 @@ class OrdersController extends AppController {
 
     public function checkout($id = null)
     {
+        if (!$this->Order->exists($id))
+        {
+            throw new NotFoundException(__('Invalid order'));
+        }
+        $options = array('conditions' => array('Order.' . $this->Order->primaryKey => $id));
+        $this->set('order', $this->Order->find('first', $options));
         
     }
 
@@ -201,21 +193,9 @@ Copyright © Europabank NV 2011
             else
             {
                 $this->Session->setFlash(__('The order could not be saved. Please, try again.'));
-            }
-
-
-
-            //User aanmaken
-            //$this->request->data['User']['tos'] = true;
-            //$this->request->data['User']['email_verified'] = true;
-            //if ($this->User->add($this->request->data)) {
-            //	$this->Session->setFlash(__d('users', 'The User has been saved'));
-            //	$this->redirect(array('action' => 'complete'));
-            //}
-            //$this->set('roles', Configure::read('Users.roles'));     
+            } 
         }
-        //$users = $this->User;
-        //$this->set(compact('users'));
+
     }
 
     public function complete($param)
