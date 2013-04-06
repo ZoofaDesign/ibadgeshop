@@ -1,22 +1,19 @@
 <div class="row-fluid">
 <div class="span12 center">
-<form name="bestel" action="orders/bestel" method="post" class="form">
-                        <input type="file" name="datafile" size="40">
-                        <?php echo $this->Form->input('Order.', array(
-    'between' => '<br />',
-    'type' => 'file'
-)); ?>
+    <?php echo $this->Form->create('Order', array('url' => '/orders/bestel', 'method' => 'post'));
+// Other inputs
+echo $this->Form->input('Design.image', array('type' => 'file')); ?>
                         <div id="preview"></div>
                         <?php 
                         $options = array('rond' => 'Rond', 'rechthoek' => 'Rechthoek','anders' => 'Anders');
                         $attributes = array('legend' => false);
-                        echo $this->Form->radio('Order.format', $options, $attributes);
+                        echo $this->Form->radio('Design.format', $options, $attributes);
                         ?>
                         <?php echo $this->Form->input('Order.aantal',array('placeholder' => 'Aantal..')); ?>
 
-                         <?php echo $this->Form->input('Order.hoogte',array('label' => 'Hoogte','placeholder' => 'Hoogte')); ?>
-                         <?php echo $this->Form->input('Order.breedte',array('label' => 'Breedte','placeholder' => 'Breedte')); ?>
-                         <?php echo $this->Form->input('Order.diameter',array('label' => 'Diameter','placeholder' => 'Diameter')); ?>
+                         <?php echo $this->Form->input('Design.hoogte',array('label' => 'Hoogte','placeholder' => 'Hoogte')); ?>
+                         <?php echo $this->Form->input('Design.breedte',array('label' => 'Breedte','placeholder' => 'Breedte')); ?>
+                         <?php echo $this->Form->input('Design.diameter',array('label' => 'Diameter','placeholder' => 'Diameter')); ?>
 
                         <?php echo $this->Form->input('Customer.naam',array('placeholder' => 'Naam & Voornaam')); ?>
                         <?php echo $this->Form->input('Customer.groepsnaam',array('placeholder' => 'Bedrijfs- of groepsnaam..')); ?>

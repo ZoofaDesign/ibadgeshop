@@ -34,7 +34,8 @@
 		</dd>
 		<dt><?php echo __('Format'); ?></dt>
 		<dd>
-			<?php echo h($order['Order']['format']); ?>
+                    <?php print_r($order); ?>
+			<?php echo h($order['Order']['Design']['format']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Sizes'); ?></dt>

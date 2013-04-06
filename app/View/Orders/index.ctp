@@ -1,3 +1,4 @@
+<div class="row-fluid">
 <div class="span3">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
@@ -49,4 +50,4 @@
 	?>
 	</div>
 </div>
-
+</div>

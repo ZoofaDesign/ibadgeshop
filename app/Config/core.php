@@ -355,4 +355,6 @@ Cache::config('_cake_model_', array(
 	'duration' => $duration
 ));
 
+require_once dirname(__DIR__) . '/Vendor/autoload.php';
+
 

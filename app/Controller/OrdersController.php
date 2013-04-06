@@ -8,6 +8,7 @@ App::uses('AppController', 'Controller');
  * @property Order $Order
  */
 class OrdersController extends AppController {
+    public $components = array('AjaxMultiUpload.Upload');
 
     public function beforeFilter()
     {
@@ -43,22 +44,31 @@ class OrdersController extends AppController {
             
             if (!empty($customer))
             {
-                
-                $this->request->data['Order']['price'] = 350.4;
-                $this->request->data['Order']['sizes'] = '5x10';
+                    $size = 0;
+                if($customer['Design']['diameter'] === ''){
+                    $size = $customer['Design']['breedte'] + $customer['Design']['hoogte'];
+                }elseif($customer['Design']['breedte'] == '' && $customer['Design']['hoogte'] !== ''){
+                    $size = $customer['Design']['diameter']*2;
+                }
+                $prijs = $customer['Order']['aantal'] * $size;
+                $this->request->data['Order']['price'] = $prijs;
                 $this->request->data['Order']['aantal'] = $customer['Order']['aantal'];
-                $this->request->data['Order']['format'] = $customer['Order']['format'];
+                $this->request->data['Design']['format'] = $customer['Design']['format'];
                 $this->request->data['Order']['customer_id'] = $customer['Customer']['klant_id'];
                 
                 if ($this->Order->save($this->request->data))
                 {
-                    $this->Session->setFlash(__('Uw bestelling is succesvol geplaatst'));
-                    $this->redirect(array('action' => 'checkout', $this->Order->id));
+                    $this->request->data['Design']['order_id'] = $this->Order->id;
+                    if ($this->Order->Design->save($this->request->data)){
+                        $this->Session->setFlash(__('Uw bestelling is succesvol geplaatst'));
+                        $this->redirect(array('action' => 'checkout', $this->Order->id));
+                    }
                 }
                 else
                 {
                     $this->Session->setFlash(__('The order could not be saved. Please, try again.'));
                 }
+
             }
  
         }

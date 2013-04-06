@@ -98,4 +98,15 @@ class DesignsController extends AppController {
 		$this->Session->setFlash(__('Design was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
+        
+        // 1) AJAX pushes a file upload to /files/upload?name=file.jpg
+ 
+// 2) FilesController::upload() handles the import by setting the file name for the image
+public function upload() {
+	$this->request->data['Upload']['image'] = $this->request->query['name'];
+ 
+	if ($this->Upload->save($this->request->data)) {
+		// File uploaded and record saved
+	}
+}
 }
