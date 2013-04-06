@@ -1,19 +1,13 @@
 /* 
     Document   : bestel
     Created on : 2-apr-2013, 19:26:03
-    Author     : Yorick
+    Author     : Zoofa-Design
     Description:
         Purpose of the stylesheet follows.
 */
 
-root { 
-    display: block;
+
+fieldset{
+	height: 500px;
+	padding: 24px;
 }
-
-.center > form {
-    margin: 0 auto;
-    width: 300px;
-    padding: 50px;
-}
-
-
