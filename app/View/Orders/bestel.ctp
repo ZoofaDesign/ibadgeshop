@@ -1,6 +1,11 @@
 <!--<div class="row-fluid">
 <div class="span12 center">
-    <?php echo $this->Form->create('Order', array('url' => '/orders/bestel', 'method' => 'post'));
+    <?php echo $this->Form->create('Order', array('url' => '/orders/bestel', 'method' => 'post', 'inputDefaults' => array(
+        'div' => array('class' => 'control-group'),
+        'label' => array('class' => 'control-label'),
+        'between' => '<div class="controls">',
+        'after' => '</div>',
+        'class' => '')));
 // Other inputs
 echo $this->Form->input('Design.image', array('type' => 'file')); ?>
                         <div id="preview"></div>
@@ -28,7 +33,7 @@ echo $this->Form->input('Design.image', array('type' => 'file')); ?>
                         $options = array('BE' => 'België', 'NL' => 'Nederland');
                         echo $this->Form->select('Customer.land', $options, array('escape' => false));
                         ?>
-                        <?php echo $this->Form->input('Customer.btw_nr',array('label' => 'BTW-nr. (indien van toepassing)','placeholder' => 'Btw-nr...')); ?>
+                        <?php echo $this->Form->input('Customer.btw_nr',array('label' => 'BTW-nr. (indien van toepassing)','placeholder' => 'Btw-nr')); ?>
                         <label class="checkbox">
                             <input type="checkbox" value="voorwaarden" required>
                             <a href="#">Voorwaarden</a>
@@ -43,7 +48,13 @@ echo $this->Form->input('Design.image', array('type' => 'file')); ?>
 </div>-->
 <div class="row-fluid">
 
-		<form name="order" action="orders/bestel" method="post" class="form-horizontal span12">
+                    <?php echo $this->Form->create('Order', array('url' => '/orders/bestel', 'method' => 'post', 'inputDefaults' => array(
+        'div' => array('class' => 'control-group'),
+        'label' => array('class' => 'control-label'),
+        'between' => '<div class="controls">',
+        'after' => '</div>',
+        'class' => '')
+                        ,'class' => 'form-horizontal span12')); ?>
 			<div class="row-fluid">
 		        <fieldset id="step1">
 		        	<?php //Eigen ontwerp uploaden ?>
@@ -51,7 +62,7 @@ echo $this->Form->input('Design.image', array('type' => 'file')); ?>
 			        	<div class="bar" style="width: 12.5%"></div>
 		        	</div>
 		        	<h3>Stap 1: Upload eerst jouw eigen ontwerp</h3>
-		        	<input type="file" name="datafile">
+		        	<?php echo $this->Form->input('Design.image', array('type' => 'file')); ?>
 		        </fieldset>
 			</div>
 			
@@ -62,7 +73,7 @@ echo $this->Form->input('Design.image', array('type' => 'file')); ?>
 			    		<div class="bar" style="width: 25%"></div>
 			    	</div>
 			    	<h3>Stap 2: Hoeveel badges wil je?</h3>
-			    	<input type="text" placeholder="100? 200? 1000?">
+                                <?php echo $this->Form->input('Order.aantal',array('placeholder' => '100? 200? 1000?')); ?>
 			    </fieldset>
 			</div>    
 			    
@@ -85,6 +96,12 @@ echo $this->Form->input('Design.image', array('type' => 'file')); ?>
 			    		<input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
 			    	  	Speciaal
 			    	</label>
+                                
+                                <?php 
+                                    $options = array('rond' => 'Rond', 'rechthoek' => 'Rechthoek','anders' => 'Anders');
+                                    $attributes = array('legend' => false, 'label' => array('class' => 'radio'));
+                                    echo $this->Form->radio('Design.format', $options, $attributes);
+                                    ?>
 			    </fieldset>
 		   	</div>
 		   	
@@ -97,17 +114,18 @@ echo $this->Form->input('Design.image', array('type' => 'file')); ?>
 			    	<h3>Stap 4: Hoe groot moet jouw badge zijn?</h3>
 			    	<h4>Jouw badge heeft een rechthoekige vorm</h4>
 			    	<p>Hier komt een foto waarmee uitgelegd wordt hoe je hoogte en breedte opmeet</p>
-			    	<input type="text" placeholder="Hoogte in cm">
-			    	<input type="text" placeholder="Breedte in cm">
+			    	<?php echo $this->Form->input('Design.hoogte',array('placeholder' => 'Hoogte in cm')); ?>
+                                <?php echo $this->Form->input('Design.breedte',array('placeholder' => 'Breedte in cm')); ?>
 			    	
 			    	<h4>Jouw badge is rond</h4>
 			    	<p>Hier komt een foto waarmee uitgelegd wordt hoe je de diameter opmeet</p>
-			    	<input type="text" placeholder="Diamater in cm">
-			    	
+                                <?php echo $this->Form->input('Design.diameter',array('placeholder' => 'Diamater in cm')); ?>
+
 			    	<h4>Jouw badge heeft een speciale vorm</h4>
 			    	<p>Hier komt een foto waarmee uitgelegd wordt hoe je hoogte en breedte opmeet</p>
-			    	<input type="text" placeholder="Hoogte in cm">
-			    	<input type="text" placeholder="Breedte in cm">
+                                <?php echo $this->Form->input('Design.hoogte',array('placeholder' => 'Hoogte in cm')); ?>
+                                <?php echo $this->Form->input('Design.breedte',array('placeholder' => 'Breedte in cm')); ?>
+
 			    </fieldset>
 			</div>
 		    <div class="row-fluid"> 
@@ -117,14 +135,21 @@ echo $this->Form->input('Design.image', array('type' => 'file')); ?>
 			    	<div class="progress progress-success progress-striped">
 			    		<div class="bar" style="width: 62.5%"></div>
 			    	</div>
-			    	<div class="control-group">
-			    		<label class="control-label" for="inputEmail">
-			    			E-mailadres
-			    		</label>
-			    	    <div class="controls">
-			    	    	<input type="text" id="inputEmail" placeholder="Email">
-			    	    </div>
-			    	</div>
+                                
+                                <?php echo $this->Form->input('Customer.naam',array('placeholder' => 'Naam & Voornaam')); ?>
+                        <?php echo $this->Form->input('Customer.groepsnaam',array('placeholder' => 'Bedrijfs- of groepsnaam..')); ?>
+                        <?php echo $this->Form->input('Customer.straat',array('placeholder' => 'Straat..','label' => 'Straat, nr, bus')); ?>
+                        <?php echo $this->Form->input('Customer.nr', array('label' => '','class' => 'span2')); ?>
+                        <?php echo $this->Form->input('Customer.bus', array('label' => '','class' => 'span1')); ?>
+                        <?php echo $this->Form->input('Customer.postcode',array('placeholder' => 'Postcode', 'type' => 'text')); ?>
+                        <?php echo $this->Form->input('Customer.telefoon',array('placeholder' => 'Telefoon')); ?>
+                        <?php echo $this->Form->input('Customer.e-mail',array('placeholder' => 'Email')); ?>
+                                
+                                <?php 
+                        $options = array('BE' => 'België', 'NL' => 'Nederland');
+                        echo $this->Form->select('Customer.land', $options, array('escape' => false,'label' => 'Land'));
+                        ?>
+                        <?php echo $this->Form->input('Customer.btw_nr',array('label' => 'BTW-nr. (indien van toepassing)','placeholder' => 'Btw-nr')); ?>
 			 	</fieldset>
 			</div>
 		 	<div class="row-fluid">		 	

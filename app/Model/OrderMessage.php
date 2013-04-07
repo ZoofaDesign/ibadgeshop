@@ -1,11 +1,11 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * Order Model
+ * OrderMessage Model
  *
- * @property User $User
+ * @property Order $Order
  */
-class Order extends AppModel {
+class OrderMessage extends AppModel {
 
 /**
  * Validation rules
@@ -13,7 +13,7 @@ class Order extends AppModel {
  * @var array
  */
 	public $validate = array(
-		'status' => array(
+		'order_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
@@ -23,17 +23,7 @@ class Order extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'price' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'format' => array(
+		'body' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
@@ -43,7 +33,7 @@ class Order extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'sizes' => array(
+		'title' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
@@ -53,9 +43,9 @@ class Order extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'finished' => array(
-			'datetime' => array(
-				'rule' => array('datetime'),
+		'reciever' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -73,21 +63,9 @@ class Order extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'Customer' => array(
-			'className' => 'Customer',
-			'foreignKey' => 'customer_id',
+		'Order' => array(
+			'className' => 'Order',
+			'foreignKey' => 'order_id',
 		)
 	);
-        
-        public $hasMany = array(
-                'Design' => array(
-                    'className'  => 'Design',
-                    'foreignKey' => 'order_id'
-                    ),
-                'OrderMessage' => array(
-                    'className'  => 'OrderMessage',
-                    'foreignKey' => 'order_id'
-                    )
-        );
-        
 }

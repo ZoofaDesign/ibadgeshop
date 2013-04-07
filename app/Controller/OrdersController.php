@@ -8,6 +8,7 @@ App::uses('AppController', 'Controller');
  * @property Order $Order
  */
 class OrdersController extends AppController {
+
     public $components = array('AjaxMultiUpload.Upload');
 
     public function beforeFilter()
@@ -23,14 +24,15 @@ class OrdersController extends AppController {
      */
     public function index()
     {
-        $this->Order->recursive = 0;
-        $this->set('orders', $this->paginate());
+        $this->Order->recursive = 1;
+        $this->set('orders', $this->Order->find('all',array('conditions' => array('Order.status' => 1,'Order.type' => 'order'))));
     }
 
     public function dashboard()
     {
-        $this->Order->recursive = 0;
-        $this->set('orders', $this->paginate());
+        $this->Order->recursive = 1;
+        $this->set('orders', $this->Order->find('all',array('conditions' => array('Order.status' => 1,'Order.type' => 'order'), 'limit' => '10', 'order' => array('Order.created'))));
+        $this->set('stalen', $this->Order->find('all',array('conditions' => array('Order.status' => 1,'Order.type' => 'staal'), 'limit' => '10', 'order' => array('Order.created'))));
     }
 
     public function bestel()
@@ -41,25 +43,30 @@ class OrdersController extends AppController {
             $this->Order->create();
             $customer = $this->Order->Customer->create();
             $customer = $this->Order->Customer->save($this->request->data);
-            
+
             if (!empty($customer))
             {
-                    $size = 0;
-                if($customer['Design']['diameter'] === ''){
+                $size = 0;
+                if ($customer['Design']['diameter'] === '')
+                {
                     $size = $customer['Design']['breedte'] + $customer['Design']['hoogte'];
-                }elseif($customer['Design']['breedte'] == '' && $customer['Design']['hoogte'] !== ''){
-                    $size = $customer['Design']['diameter']*2;
+                }
+                elseif ($customer['Design']['breedte'] == '' && $customer['Design']['hoogte'] !== '')
+                {
+                    $size = $customer['Design']['diameter'] * 2;
                 }
                 $prijs = $customer['Order']['aantal'] * $size;
                 $this->request->data['Order']['price'] = $prijs;
+                $this->request->data['Order']['type'] = 'order';
                 $this->request->data['Order']['aantal'] = $customer['Order']['aantal'];
                 $this->request->data['Design']['format'] = $customer['Design']['format'];
                 $this->request->data['Order']['customer_id'] = $customer['Customer']['klant_id'];
-                
+
                 if ($this->Order->save($this->request->data))
                 {
                     $this->request->data['Design']['order_id'] = $this->Order->id;
-                    if ($this->Order->Design->save($this->request->data)){
+                    if ($this->Order->Design->save($this->request->data))
+                    {
                         $this->Session->setFlash(__('Uw bestelling is succesvol geplaatst'));
                         $this->redirect(array('action' => 'checkout', $this->Order->id));
                     }
@@ -68,15 +75,41 @@ class OrdersController extends AppController {
                 {
                     $this->Session->setFlash(__('The order could not be saved. Please, try again.'));
                 }
-
             }
- 
         }
     }
-
-    private function addCustomer()
+    
+    public function bestel_staal($param)
     {
-        
+        $size = 0;
+                if ($customer['Design']['diameter'] === '')
+                {
+                    $size = $customer['Design']['breedte'] + $customer['Design']['hoogte'];
+                }
+                elseif ($customer['Design']['breedte'] == '' && $customer['Design']['hoogte'] !== '')
+                {
+                    $size = $customer['Design']['diameter'] * 2;
+                }
+                $prijs = $customer['Order']['aantal'] * $size;
+                $this->request->data['Order']['price'] = $prijs;
+                $this->request->data['Order']['type'] = 'staal';
+                $this->request->data['Order']['aantal'] = $customer['Order']['aantal'];
+                $this->request->data['Design']['format'] = $customer['Design']['format'];
+                $this->request->data['Order']['customer_id'] = $customer['Customer']['klant_id'];
+
+                if ($this->Order->save($this->request->data))
+                {
+                    $this->request->data['Design']['order_id'] = $this->Order->id;
+                    if ($this->Order->Design->save($this->request->data))
+                    {
+                        $this->Session->setFlash(__('Uw bestelling is succesvol geplaatst'));
+                        $this->redirect(array('action' => 'checkout', $this->Order->id));
+                    }
+                }
+                else
+                {
+                    $this->Session->setFlash(__('The order could not be saved. Please, try again.'));
+                }
     }
 
     public function checkout($id = null)
@@ -87,7 +120,6 @@ class OrdersController extends AppController {
         }
         $options = array('conditions' => array('Order.' . $this->Order->primaryKey => $id));
         $this->set('order', $this->Order->find('first', $options));
-        
     }
 
     public function redirectAction()
@@ -203,9 +235,8 @@ Copyright © Europabank NV 2011
             else
             {
                 $this->Session->setFlash(__('The order could not be saved. Please, try again.'));
-            } 
+            }
         }
-
     }
 
     public function complete($param)
@@ -273,14 +304,84 @@ Copyright © Europabank NV 2011
         $this->redirect(array('action' => 'index'));
     }
 
-    public function getOrderByStatus($id, $status)
+    private function getOrderByStatus($id, $status)
     {
         if (!$this->Order->exists($id))
         {
             throw new NotFoundException(__('Invalid order'));
         }
-        $options = array('conditions' => array('Order.' . $this->Order->status => $status));
+        $options = array('conditions' => array('Order.status' . $this->Order->status => $status));
         $this->set('orders', $this->Order->find('all', $options));
+    }
+
+    public function betaling()
+    {
+        
+    }
+
+    public function gelukt()
+    {
+        
+    }
+
+    public function nieuw()
+    {
+        $this->Order->recursive = 1;
+        $this->set('orders', $this->Order->find('all',array('conditions' => array('Order.status' => 1,'Order.type' => 'order'))));
+    }
+
+    public function producing()
+    {
+        $this->Order->recursive = 1;
+        $this->set('orders', $this->Order->find('all',array('conditions' => array('Order.status' => 6,'Order.type' => 'order'))));
+    }
+
+    public function manuf_examples()
+    {
+        $this->Order->recursive = 1;
+        $this->set('orders', $this->Order->find('all',array('conditions' => array('Order.status' => 2,'Order.type' => 'order'))));
+    }
+
+    public function manuf_produced()
+    {
+        $this->Order->recursive = 1;
+        $this->set('orders', $this->Order->find('all',array('conditions' => array('Order.status' => 7,'Order.type' => 'order'))));
+    }
+
+    public function verzonden()
+    {
+        $this->Order->recursive = 1;
+        $this->set('orders', $this->Order->find('all',array('conditions' => array('Order.status' => 8,'Order.type' => 'order'))));
+    }
+
+    public function verzonden_klant()
+    {
+        $this->Order->recursive = 1;
+        $this->set('orders', $this->Order->find('all',array('conditions' => array('Order.status' => 9,'Order.type' => 'order'))));
+    }
+
+    public function voorbeelden()
+    {
+        $this->Order->recursive = 1;
+        $this->set('orders', $this->Order->find('all',array('conditions' => array('Order.status' => 5,'Order.type' => 'order'))));
+    }
+
+    public function stalen()
+    {
+        if (!$this->Order->exists($id))
+        {
+            throw new NotFoundException(__('Invalid order'));
+        }
+        $options = array('conditions' => array('Order.type' . $this->Order->status => $status));
+        $this->set('orders', $this->Order->find('all',array('conditions' => array('Order.type' => 'order'))));
+    }
+    
+    public function stalen_accepted(){
+        //Hier code die die de stalen
+    }
+    
+    public function accept_staal(){
+    
     }
 
 }

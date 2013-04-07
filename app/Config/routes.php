@@ -33,7 +33,7 @@ Router::connect('/', array('controller' => 'orders', 'action' => 'bestel'));
  */
 Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
-//Router::connect('/admin', array('controller' => 'orders', 'action' => 'dashboard'));
+Router::connect('/admin', array('controller' => 'orders', 'action' => 'dashboard'));
 
 
 /**
