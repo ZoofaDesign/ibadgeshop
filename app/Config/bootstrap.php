@@ -74,8 +74,7 @@ Cache::config('default', array('engine' => 'File'));
 CakePlugin::load('Users', array('routes' => true));
 CakePlugin::load('Search');
 CakePlugin::load('Utils');
-CakePlugin::load('Uploader');
-CakePlugin::load('AjaxMultiUpload', array('bootstrap' => true));
+
 /**
  * You can attach event listeners to the request lifecyle as Dispatcher Filter . By Default CakePHP bundles two filters:
  *
