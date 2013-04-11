@@ -10,35 +10,24 @@
 	</ul>
 </div>
 <div class="span9">
-<h2><?php  echo __('Order'); ?></h2>
-	<dl>
-		<dt><?php echo __('Klant'); ?></dt>
-		<dd>
-			<?php echo $this->Html->link($order['Customer']['klant_id'], array('controller' => 'customer', 'action' => 'view', $order['Customer']['klant_id'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Status'); ?></dt>
-		<dd>
-			<?php echo h($order['Order']['status']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Prijs'); ?></dt>
-		<dd>
-			<?php echo h($order['Order']['price']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Type'); ?></dt>
-		<dd>
-                    <?php print_r($order); ?>
-			<?php echo h($order['Design']['format']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Sizes'); ?></dt>
-		<dd>
-			<?php echo h($order['Order']['sizes']); ?>
-                    <?php echo h($order['Order']['sizes']); ?>
-			&nbsp;
-		</dd>
-	</dl>
+<h2><?php  echo __('Bestelling'); ?></h2>
+
+		<?php echo $this->Html->link("Bestelling ".$customer['Order']['id'], array('controller' => 'orders', 'action' => 'view', $customer['Order']['id'])); ?>
+                    <br>
+                        Prijs: <?php echo $customer['Order']['price']; ?>
+                        
+                <address>
+  <strong><?php echo h($customer['Customer']['naam']); ?></strong><br>
+  <?php echo h($customer['Customer']['groepsnaam']); ?><br>
+  <?php echo h($customer['Customer']['straat']); ?>, <?php echo h($customer['Customer']['nr']); ?> <?php echo h($customer['Customer']['bus']); ?><br>
+  <?php echo h($customer['Customer']['postcode']); ?> <?php echo h($customer['Customer']['gemeente']); ?><br>
+  <?php echo h($customer['Customer']['land']); ?><br>
+  <abbr title="Telefoon">T:</abbr> <?php echo h($customer['Customer']['telefoon']); ?><br>
+  <?php echo h($customer['Customer']['e-mail']); ?><br>
+  <?php if($order['Customer']['btw_nr']!==''){
+      echo h($order['Customer']['btw_nr']);
+  }?>
+</address>
+
 </div>
 

@@ -48,6 +48,7 @@ $defaultTitle = __d('ibadge_title', 'Ibadge - D&eacute; nummer 1 in geborduurde 
                 echo $this->Html->script('fullcalendar.min');
                 echo $this->Html->script('gcal');
                 echo $this->Html->script('setup');
+                echo $this->Html->script('ibadge');
                 
 		echo $this->fetch('script');
 	?>

@@ -114,26 +114,29 @@ class OrdersController extends AppController {
 
     public function checkout($id = null)
     {
+        //Tonen van order gegevens
         if (!$this->Order->exists($id))
         {
             throw new NotFoundException(__('Invalid order'));
         }
-        $options = array('conditions' => array('Order.' . $this->Order->primaryKey => $id));
+        $options = array('conditions' => array('Order.id' => $id));
         $this->set('order', $this->Order->find('first', $options));
+        
+        
     }
 
-    public function redirectAction()
+    public function betaal()
     {
-        $storename = 'YOUR STORE';
-        $order_id = 'Orderid 123';
-        $amount = '1200';
+        $storename = 'Ibadge';
+        $order_id = 'o'.$this->Order->id .'c'. $this->Order->Customer->klant_id;
+        $amount = $this->Order->aantal;
         $description = 'Order ' . $order_id . ' at ' . $storename;
         $signature = sha1(
-                '1234567890' .
+                '9058760101' .
                 $order_id .
                 $amount .
                 $description .
-                'YOURSERVERSECRET'
+                'S058762115'
         );
         $ip = $_SERVER['REMOTE_ADDR'];
         if (isset($_SERVER['HTTP_X_FORWARDED_FOR']))
@@ -141,13 +144,13 @@ class OrdersController extends AppController {
             $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
         }
         //REDIRECT URL TOEVOEGEN -> NA BETALING WHERE TO GO
-        $redirecturl = 'http://your.redirect.url/goback';
+        $redirecturl = 'http://ibadge.local/orders/';
         $request = '<?xml version="1.0" encoding="UTF-8"?>
 <MPI_Interface>
 <Authorize>
 <version>1.1</version>
 <Merchant>
-<uid>' . '1234567890' . '</uid>
+<uid>' . '9058760101' . '</uid>
 <beneficiary>' . $storename . '</beneficiary>
 <title>' . $storename . '</title>
 <redirecttype>' . 'DIRECT' . '</redirecttype>
@@ -198,6 +201,18 @@ Copyright © Europabank NV 2011
         }
         $response = @stream_get_contents($fp);
         return $response;
+    }
+    
+    public function betaling_response(){
+        
+    }
+    
+    public function betaling_geslaagd(){
+        
+    }
+    
+    public function betaling_mislukt(){
+        
     }
 
     /**

@@ -6,79 +6,65 @@
         </ul>
     </div>
     <div class="span9">
-        <h2><?php echo __('Orders'); ?></h2>
-        <table cellpadding="0" cellspacing="0" class="table table-striped">
-            <tr>
-                <th>Klant</th>
-                <th>Status</th>
-                <th>Prijs</th>
-                <th>Ontwerpen</th>
-                <th>Berichten</th>
-                <th class="actions">Acties</th>
-            </tr>
-            <?php foreach ($orders as $order): ?>
+        <div class="container-fluid">
+    <div class="row-fluid">
+        <h2><?php echo __('Bestellingen'); ?></h2>
+        <ul class="thumbnails">
+        <?php foreach ($orders as $order): ?>
+            <li class="span4">
+                <div class="thumbnail">
+                    <img data-src="holder.js/300x200" alt="">
+                    <div class="caption">
+                        <h3>Bestelling <?php echo $order['Order']['id'] ?></h3>
+                        <p>Status: <?php echo h($order['Order']['status']); ?><br>
+                            Prijs: <?php echo h($order['Order']['price']); ?><br>
+                            <?php if (!empty($order['Design']))
+                            {
+                                foreach ($order['Design'] as $design):?>
+                            Type: <?php echo h($design['format']); ?><br>
+                            <?php
+                            if ($design['format'] === 'rond')
+                            {
+                                ?>Diameter: <?php
+                                echo h($design['diameter']);
+                            }
+                            else
+                            {
+                                ?>Breedte: <?php
+                                echo h($design['breedte']);
+                                ?><br>Hoogte: <?php
+                                echo h($design['hoogte']);
+                            }
+                            ?>
+                            <br><?php echo $this->Html->link($order['Customer']['naam'], array('controller' => 'customers', 'action' => 'view', $order['Customer']['klant_id'])); ?>
+                            <?php echo $this->Html->link($design['image'], array('controller' => 'Design', 'action' => 'view', $design['order_id']));
 
-                <tr>
-                    <td>
-                        <?php echo $this->Html->link($order['Customer']['naam'], array('controller' => 'customers', 'action' => 'view', $order['Customer']['klant_id'])); ?>
-                    </td>
-                    <td><?php echo h($order['Order']['status']); ?></td>
-                    <td><?php echo h($order['Order']['price']); ?><?php //print_r($order);   ?></td>
-
-                    <?php
-                    if (!empty($order['Design']))
-                    {
-                        ?>
-                        <td>
-                            <?php foreach ($order['Design'] as $design): ?>
-            <?php echo $this->Html->link($design['image'], array('controller' => 'Design', 'action' => 'view', $design['order_id'])); ?>
-                                <dl class="dl-horizontal">
-
-                                    <dt>Type</dt>
-                                    <dd><?php echo h($design['format']); ?></dd>
-                                    <?php
-                                    if ($design['format'] === 'rond')
-                                    {
-                                        ?>
-                                        <dt>Diameter</dt>
-                                        <dd><?php echo h($design['diameter']); ?></dd>
-                                        <?php
-                                    }
-                                    else
-                                    {
-                                        ?>
-                                        <dt>Breedte</dt>
-                                        <dd><?php echo h($design['breedte']); ?></dd>
-                                        <dt>Hoogte</dt>
-                                        <dd><?php echo h($design['hoogte']); ?></dd>
-                                <?php } ?>
-                                </dl>
-                        <?php endforeach; ?>
-                        </td>
-                        <?php } ?>
-
-                    <td>
-                        <?php foreach ($order['OrderMessage'] as $message): ?>
-        <?php echo $this->Html->link($message['title'], array('controller' => 'OrderMessages', 'action' => 'view', $message['id'])); ?>
-    <?php endforeach; ?>
-                    </td>
-                    <td class="actions">
-
-                        <div class="btn-group">
-                            <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> Acties</a>
-                            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                                endforeach;
+                            }
+                            ?>
+                        </p>
+                    </div>
+                        <p><a href="#" class="btn btn-success"><?php echo __('Accepteer'); ?></a> <a href="#" class="btn btn-danger"><?php echo __('Weigeren'); ?></a></p>
+                                        <div class="btn-group">
+                            <a class="btn" href="#"><i class="icon-user"></i><?php echo __('Opties'); ?></a>
+                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><i class="icon-pencil"></i><?php echo $this->Html->link(__('Aanpassen'), array('action' => 'edit', $order['Order']['id'])); ?></a></li>
-                                <li><a href="#"><i class="icon-trash"></i><?php echo $this->Form->postLink(__('Verwijderen'), array('action' => 'delete', $order['Order']['id']), null, __('Are you sure you want to delete # %s?', $order['Order']['id'])); ?></a></li>
+                                <li><a href="/orders/edit/<?php echo $order['Order']['id']; ?>"><i class="icon-pencil"></i><?php echo ' '.__('Aanpassen'); ?></a></li>
+                                <li><a href="/orders/delete/<?php echo $order['Order']['id']; ?>"><i class="icon-trash"></i><?php echo ' '.__('Verwijderen'); ?></a></li>
                                 <li class="divider"></li>
-                                <li><a href="#"><i class="i"></i><?php echo $this->Html->link(__('Nieuw bericht'), array('controller' => 'ordermessages', 'action' => 'add', $order['Order']['id'])); ?>
-</a></li>
+                                <li><a href="/ordermessages/add?order=<?php echo $order['Order']['id']; ?>"><i class="i"></i><?php echo __('Nieuw bericht'); ?></a></li>
                             </ul>
                         </div>
-                    </td>
-                </tr>
-<?php endforeach; ?>
-        </table>
+                </div>
+                
+            </li>
+            
 
+
+
+<?php endforeach; ?>
+        </ul>
+    </div>
+        </div>
     </div>
 </div>

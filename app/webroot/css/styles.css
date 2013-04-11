@@ -613,3 +613,7 @@ ul.stat-list {
 /* ============== settings ============== */
 .settings-group {
   margin-top: 40px; }
+
+/* ============== ibadge ================ */
+.first-in-row { margin-left: 0 !important; }​
+
