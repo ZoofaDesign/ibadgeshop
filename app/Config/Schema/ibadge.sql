@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Machine: 127.0.0.1
--- Genereertijd: 07 apr 2013 om 23:55
+-- Genereertijd: 11 apr 2013 om 22:45
 -- Serverversie: 5.5.27
 -- PHP-versie: 5.4.7
 
@@ -53,7 +53,6 @@ INSERT INTO `customers` (`klant_id`, `user_id`, `naam`, `groepsnaam`, `straat`, 
 (22, '', 'sdsd', 'qsd', 'sdqd', '25', '4', 9000, '', '', '', '', '0'),
 (23, '', 'Yorick Horrie', '', 'Vinkenlaan ', '35', '', 9000, '', 'BE', '0', 'test@example.com', ''),
 (24, '', 'Yorick Horrie', '', 'Vinkenlaan ', '35', '', 9000, '', 'BE', '0', 'test@examdple.com', ''),
-(25, '', 'sdqsd', 'sdqsd', 'qsdqsd', '1', '2', 2, '', 'BE', '6', 'yorick@test.com', '0'),
 (26, '', 'cbvxcb', '', 'cvcxv', '2', '', 9000, '', 'BE', '542458', 'h@k.com', '0'),
 (28, '', 'cbvxcb', '', 'cvcxv', '2', '', 9000, '', 'BE', '542458', 'h@kff.com', '0'),
 (30, '', 'cbvxcb', '', 'cvcxv', '2', '', 9000, '', 'BE', '542458', 'h@kzff.com', '0'),
@@ -129,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `type` varchar(20) NOT NULL DEFAULT 'order',
   `code` varchar(80) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=54 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=44 ;
 
 --
 -- Gegevens worden uitgevoerd voor tabel `orders`
