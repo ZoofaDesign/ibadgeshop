@@ -13,7 +13,8 @@
 /dist
 /tags
 /app/Config/database.php
-
+ibadgeshop.esproj
+.gitignore
 # OS generated files #
 ######################
 .DS_Store
