@@ -63,7 +63,7 @@ class Customer extends AppModel {
 		),
 		'postcode' => array(
 			'notempty' => array(
-				'rule' => array('notempty'),
+				'rule' => array('postal', null, 'be'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,

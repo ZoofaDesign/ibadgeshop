@@ -12,22 +12,29 @@
 <div class="span9">
 <h2><?php  echo __('Bestelling'); ?></h2>
 
-		<?php echo $this->Html->link("Bestelling ".$customer['Order']['id'], array('controller' => 'orders', 'action' => 'view', $customer['Order']['id'])); ?>
+		<?php echo "Bestelling ".$order['Order']['id'];?>
+                   <img src="<?php echo '/files/design/image/'.$order['Design'][0]['dir'].'/'.$order['Design'][0]['image']; ?>" />
                     <br>
-                        Prijs: <?php echo $customer['Order']['price']; ?>
-                        
+                        Prijs: <?php echo $order['Order']['price']; ?>
+                        <br>
+                        Formaat: <?php echo $order['Design'][0]['format']; ?>
+                        <br>
+                        Breedte: <?php echo $order['Design'][0]['breedte']; ?>
+                        <br>
+                        Hoogte: <?php echo $order['Design'][0]['hoogte']; ?>
                 <address>
-  <strong><?php echo h($customer['Customer']['naam']); ?></strong><br>
-  <?php echo h($customer['Customer']['groepsnaam']); ?><br>
-  <?php echo h($customer['Customer']['straat']); ?>, <?php echo h($customer['Customer']['nr']); ?> <?php echo h($customer['Customer']['bus']); ?><br>
-  <?php echo h($customer['Customer']['postcode']); ?> <?php echo h($customer['Customer']['gemeente']); ?><br>
-  <?php echo h($customer['Customer']['land']); ?><br>
-  <abbr title="Telefoon">T:</abbr> <?php echo h($customer['Customer']['telefoon']); ?><br>
-  <?php echo h($customer['Customer']['e-mail']); ?><br>
+  <strong><?php echo h($order['Customer']['naam']); ?></strong><br>
+  <?php echo h($order['Customer']['groepsnaam']); ?><br>
+  <?php echo h($order['Customer']['straat']); ?>, <?php echo h($order['Customer']['nr']); ?> <?php echo h($order['Customer']['bus']); ?><br>
+  <?php echo h($order['Customer']['postcode']); ?> <?php echo h($order['Customer']['gemeente']); ?><br>
+  <?php echo h($order['Customer']['land']); ?><br>
+  <abbr title="Telefoon">T:</abbr> <?php echo h($order['Customer']['telefoon']); ?><br>
+  <?php echo h($order['Customer']['e-mail']); ?><br>
   <?php if($order['Customer']['btw_nr']!==''){
       echo h($order['Customer']['btw_nr']);
   }?>
 </address>
+<?php echo $this->Html->link("Bestelling ".$order['Order']['id'], array('controller' => 'orders', 'action' => 'view', $order['Order']['id'])); ?>
 
 </div>
 

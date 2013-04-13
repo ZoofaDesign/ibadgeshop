@@ -1,12 +1,6 @@
 <div class="row-fluid">
     <?php
-    echo $this->Form->create('Order', array('url' => '/orders/bestel', 'method' => 'post', 'inputDefaults' => array(
-            'div' => array('class' => 'control-group'),
-            'label' => array('class' => 'control-label'),
-            'between' => '<div class="controls">',
-            'after' => '</div>',
-            'class' => '')
-        , 'class' => 'form-horizontal span12'));
+    echo $this->Form->create('Order', array('url' => '/orders/bestel', 'method' => 'post', 'class' => 'form-horizontal span12','type' => 'file'));
     ?>
     <div class="row-fluid">
         <fieldset id="step1">
@@ -15,7 +9,7 @@
                 <div class="bar" style="width: 12.5%"></div>
             </div>
             <h3>Stap 1: Upload eerst jouw eigen ontwerp</h3>
-            <?php echo $this->Form->input('Design.0.image', array('type' => 'file')); ?>
+            <?php echo $this->Form->input('Design.image', array('type' => 'file')); ?>
         </fieldset>
     </div>
 
@@ -53,7 +47,7 @@
             <?php
             $options = array('rond' => 'Rond', 'rechthoek' => 'Rechthoek', 'anders' => 'Anders');
             $attributes = array('legend' => false, 'label' => array('class' => 'radio'));
-            echo $this->Form->radio('Design.0.format', $options, $attributes);
+            echo $this->Form->radio('Design.format', $options, $attributes);
             ?>
         </fieldset>
     </div>
@@ -68,19 +62,19 @@
             <div id="select-rechthoekig">
                 <h4>Jouw badge heeft een rechthoekige vorm</h4>
                 <p>Hier komt een foto waarmee uitgelegd wordt hoe je hoogte en breedte opmeet</p>
-                <?php echo $this->Form->input('Design.0.hoogte', array('placeholder' => 'Hoogte in cm')); ?>
-                <?php echo $this->Form->input('Design.0.breedte', array('placeholder' => 'Breedte in cm')); ?>
+                <?php echo $this->Form->input('Design.hoogte', array('placeholder' => 'Hoogte in cm')); ?>
+                <?php echo $this->Form->input('Design.breedte', array('placeholder' => 'Breedte in cm')); ?>
             </div>
             <div id="select-rond">
                 <h4>Jouw badge is rond</h4>
                 <p>Hier komt een foto waarmee uitgelegd wordt hoe je de diameter opmeet</p>
-                <?php echo $this->Form->input('Design.0.diameter', array('placeholder' => 'Diamater in cm')); ?>
+                <?php echo $this->Form->input('Design.diameter', array('placeholder' => 'Diamater in cm')); ?>
             </div>
             <div id="select-speciaal">
                 <h4>Jouw badge heeft een speciale vorm</h4>
                 <p>Hier komt een foto waarmee uitgelegd wordt hoe je hoogte en breedte opmeet</p>
-                <?php echo $this->Form->input('Design.0.hoogte', array('placeholder' => 'Hoogte in cm')); ?>
-                <?php echo $this->Form->input('Design.0.breedte', array('placeholder' => 'Breedte in cm')); ?>
+                <?php echo $this->Form->input('Design.specialHoogte', array('placeholder' => 'Hoogte in cm')); ?>
+                <?php echo $this->Form->input('Design.specialBreedte', array('placeholder' => 'Breedte in cm')); ?>
             </div>
         </fieldset>
     </div>
@@ -96,26 +90,21 @@
             <div class="row-fluid">
                 <div class="span6">
                     <?php echo $this->Form->input('Customer.naam', array('placeholder' => 'Naam & Voornaam')); ?>
-                    <?php echo $this->Form->input('Customer.0.groepsnaam', array('placeholder' => 'Bedrijfs- of groepsnaam..')); ?>
-                    <?php echo $this->Form->input('Customer.0.straat', array('placeholder' => 'Straat..', 'label' => 'Straat, nr, bus')); ?>
-                    <?php echo $this->Form->input('Customer.0.nr', array('label' => '', 'class' => 'span2')); ?>
-                    <?php echo $this->Form->input('Customer.0.bus', array('label' => '', 'class' => 'span1')); ?>
+                    <?php echo $this->Form->input('Customer.groepsnaam', array('placeholder' => 'Bedrijfs- of groepsnaam..')); ?>
+                    <?php echo $this->Form->input('Customer.straat', array('placeholder' => 'Straat..', 'label' => 'Straat, nr, bus')); ?>
+                    <?php echo $this->Form->input('Customer.nr', array('label' => '', 'class' => 'span2')); ?>
+                    <?php echo $this->Form->input('Customer.bus', array('label' => '', 'class' => 'span1')); ?>
                 </div>
                 <div class="span6">
-                    <?php echo $this->Form->input('Customer.0.postcode', array('placeholder' => 'Postcode', 'type' => 'text')); ?>
-                    <?php echo $this->Form->input('Customer.0.telefoon', array('placeholder' => 'Telefoon')); ?>
-                    <?php echo $this->Form->input('Customer.0.e-mail', array('placeholder' => 'Email')); ?>
-                     <div class="control-group"><label for="Customer0Land" class="control-label">Land</label><div class="controls">
-                    <?php
-                    $options = array('BE' => 'België', 'NL' => 'Nederland');
-                    echo $this->Form->select('Customer.0.land', $options, array('escape' => false));
-                    ?>
-                             </div></div>
-                    <?php echo $this->Form->input('Customer.0.btw_nr', array('placeholder' => 'BTW-nr. (indien van toepassing)')); ?>
-                     <div class="control-group"><div class="controls">
-                      <label for="Customer0Land" class="checkbox">
-                          <input type="checkbox" value="voorwaarden" required><a href="/voorwaarden">Voorwaarden</a></label>
-                         </div></div>
+                    <?php echo $this->Form->input('Customer.postcode', array('placeholder' => 'Postcode', 'type' => 'text')); ?>
+                    <?php echo $this->Form->input('Customer.gemeente', array('placeholder' => 'Gemeente', 'type' => 'text')); ?>
+                    <?php echo $this->Form->input('Customer.telefoon', array('placeholder' => 'Telefoon')); ?>
+                    <?php echo $this->Form->input('Customer.e-mail', array('placeholder' => 'Email', 'type' => 'email')); ?>
+                            <?php echo $this->Form->select('Customer.land', array('BE' => 'België', 'NL' => 'Nederland'), array('escape' => false)); ?>
+                        
+                    <?php echo $this->Form->input('Customer.btw_nr', array('placeholder' => 'BTW-nr. (indien van toepassing)')); ?>
+                            <label for="Customer0Land" class="checkbox">
+                                <input type="checkbox" value="voorwaarden" required><a href="/voorwaarden">Voorwaarden</a></label>
                     </label>
                     <div class="form-actions">
                         <button type="submit" class="btn btn-primary">Bestellen</button>

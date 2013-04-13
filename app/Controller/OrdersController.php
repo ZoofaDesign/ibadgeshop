@@ -9,7 +9,7 @@ App::uses('AppController', 'Controller');
  */
 class OrdersController extends AppController {
 
-    public $components = array('AjaxMultiUpload.Upload');
+   // public $components = array('ImageUploader');
 
     public function beforeFilter()
     {
@@ -38,28 +38,40 @@ class OrdersController extends AppController {
     public function bestel()
     {
         $this->layout = 'bestel';
+        
         if ($this->request->is('post'))
         {
             $this->Order->create();
+            xdebug_break();
             $customer = $this->Order->Customer->create();
             $customer = $this->Order->Customer->save($this->request->data);
 
             if (!empty($customer))
             {
                 $size = 0;
-                if ($customer['Design']['diameter'] === '')
+                
+                if ($this->request->data['Design']['format'] === 'rechthoek')
                 {
-                    $size = $customer['Design']['breedte'] + $customer['Design']['hoogte'];
+                    $size = $this->request->data['Design']['breedte'] + $this->request->data['Design']['hoogte'];
+                    $this->request->data['Design']['diameter'] = 0;
                 }
-                elseif ($customer['Design']['breedte'] == '' && $customer['Design']['hoogte'] !== '')
+                elseif ($this->request->data['Design']['format'] === 'rond')
                 {
-                    $size = $customer['Design']['diameter'] * 2;
+                    $size = $this->request->data['Design']['diameter'] * 2;
+                }
+                elseif ($this->request->data['Design']['format'] === 'anders')
+                {
+                    $size = $this->request->data['Design']['specialHoogte'] + $this->request->data['Design']['specialBreedte'];
+                    $this->request->data['Design']['hoogte'] = $this->request->data['Design']['specialHoogte'];
+                    $this->request->data['Design']['breedte'] = $this->request->data['Design']['specialBreedte'];
+                    $this->request->data['Design']['diameter'] = 0;
                 }
                 $prijs = $customer['Order']['aantal'] * $size;
+                $this->request->data['Design']['size'] = $size;
                 $this->request->data['Order']['price'] = $prijs;
                 $this->request->data['Order']['type'] = 'order';
-                $this->request->data['Order']['aantal'] = $customer['Order']['aantal'];
-                $this->request->data['Design']['format'] = $customer['Design']['format'];
+               // $this->request->data['Order']['aantal'] = $customer['Order']['aantal'];
+               // $this->request->data['Design']['format'] = $customer['Design']['format'];
                 $this->request->data['Order']['customer_id'] = $customer['Customer']['klant_id'];
 
                 if ($this->Order->save($this->request->data))

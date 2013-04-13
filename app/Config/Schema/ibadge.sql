@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Machine: 127.0.0.1
--- Genereertijd: 11 apr 2013 om 22:45
+-- Genereertijd: 13 apr 2013 om 04:42
 -- Serverversie: 5.5.27
 -- PHP-versie: 5.4.7
 
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `btw_nr` varchar(20) NOT NULL DEFAULT 'null',
   PRIMARY KEY (`klant_id`),
   UNIQUE KEY `e-mail` (`e-mail`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=58 ;
 
 --
 -- Gegevens worden uitgevoerd voor tabel `customers`
@@ -68,7 +68,14 @@ INSERT INTO `customers` (`klant_id`, `user_id`, `naam`, `groepsnaam`, `straat`, 
 (42, '', 'seezer', '', 'sfddf', '45', '', 8500, '', 'BE', '1516', 'lkqengttsjfd@gdfsee.com', '15'),
 (43, '', 'seezer', '', 'sfddf', '45', '', 8500, '', 'BE', '1516', 'lkqengtmmtsjfd@gdfeesee.com', '15'),
 (44, '', 'seezer', '', 'sfddf', '45', '', 8500, '', 'BE', '1516', 'lkqentttgtmmtsjfd@gdfeesee.com', '15'),
-(45, '', 'seezer', '', 'sfddf', '45', '', 8500, '', 'BE', '1516', 'lkwwntttgtmmtsjfd@gdfeesee.com', '15');
+(45, '', 'seezer', '', 'sfddf', '45', '', 8500, '', 'BE', '1516', 'lkwwntttgtmmtsjfd@gdfeesee.com', '15'),
+(51, '', 'sdfsdf', '', 'sdfe', '12', '', 9713, '', 'BE', '8464', 'ergrg@ges.cve', ''),
+(52, '', 'sdfsdf', '', 'sdfe', '12', '', 9713, '', 'BE', '8464', 'eriiigrg@getrs.cve', ''),
+(53, '', 'fezhfkyt', '', 'tyeezds', '554', '', 445636, '', 'BE', '42166', 'kj@ppzaee.com', ''),
+(54, '', 'fezhfkyt', '', 'tyeezds', '554', '', 445636, '', 'BE', '42166', 'kj@ppzaooee.com', ''),
+(55, '', 'sqdqdq', 'zdq', 'dqsfd', '315', '', 18191, '', 'BE', '16819', 'MMPPZZ@mld.ve', ''),
+(56, '', 'Pol Lepel', '', 'Kerkstraat', '15', '', 9000, 'Gent', 'BE', '0348879', 'msqdplzea@fieedf.com', ''),
+(57, '', 'gdgdfg', '', 'retet', '524', '', 9200, 'DFSFeerz', 'BE', '4545', 'uyiyui@rfefr.com', '');
 
 -- --------------------------------------------------------
 
@@ -79,24 +86,33 @@ INSERT INTO `customers` (`klant_id`, `user_id`, `naam`, `groepsnaam`, `straat`, 
 CREATE TABLE IF NOT EXISTS `designs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
+  `model` varchar(20) NOT NULL DEFAULT 'order',
   `image` varchar(80) NOT NULL,
+  `dir` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `size` int(11) NOT NULL DEFAULT '0',
+  `active` tinyint(1) NOT NULL DEFAULT '1',
   `format` varchar(20) NOT NULL,
   `hoogte` int(11) NOT NULL,
   `breedte` int(11) NOT NULL,
   `diameter` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Gegevens worden uitgevoerd voor tabel `designs`
 --
 
-INSERT INTO `designs` (`id`, `order_id`, `image`, `format`, `hoogte`, `breedte`, `diameter`) VALUES
-(1, 0, '', 'rond', 30, 69, 14),
-(2, 45, '', 'rond', 30, 69, 14),
-(3, 46, '', 'rond', 30, 69, 14),
-(4, 42, 'designs/541828_10150771597591042_914453430_n-1.jpg', 'rechthoek', 10, 8, 0),
-(5, 43, 'designs/4bans.png', 'rond', 0, 0, 3);
+INSERT INTO `designs` (`id`, `order_id`, `model`, `image`, `dir`, `type`, `size`, `active`, `format`, `hoogte`, `breedte`, `diameter`) VALUES
+(1, 0, 'order', '', '', '', 0, 1, 'rond', 30, 69, 14),
+(2, 45, 'order', '', '', '', 0, 1, 'rond', 30, 69, 14),
+(3, 46, 'order', '', '', '', 0, 1, 'rond', 30, 69, 14),
+(4, 42, 'order', 'designs/541828_10150771597591042_914453430_n-1.jpg', '', '', 0, 1, 'rechthoek', 10, 8, 0),
+(5, 43, 'order', 'designs/4bans.png', '', '', 0, 1, 'rond', 0, 0, 3),
+(6, 44, 'order', '6408445_700b.jpg', '', '', 0, 1, 'rechthoek', 0, 0, 0),
+(7, 47, 'order', '4bans.PNG', '', '', 0, 1, 'rechthoek', 10, 5, 0),
+(8, 48, 'order', 'ibadge.PNG', '', '', 17, 1, 'rechthoek', 12, 5, 0),
+(9, 49, 'order', '541828_10150771597591042_914453430_n.jpg', '9', 'image/jpeg', 19316, 1, 'rechthoek', 12, 4, 0);
 
 -- --------------------------------------------------------
 
@@ -128,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `type` varchar(20) NOT NULL DEFAULT 'order',
   `code` varchar(80) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=44 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=50 ;
 
 --
 -- Gegevens worden uitgevoerd voor tabel `orders`
@@ -141,7 +157,13 @@ INSERT INTO `orders` (`id`, `status`, `price`, `aantal`, `created`, `modified`, 
 (40, '1', 350, 60, '2013-04-05 00:24:05', '2013-04-05 00:24:05', '0000-00-00 00:00:00', '23', 'order', ''),
 (41, '1', 350, 200, '2013-04-05 23:31:36', '2013-04-05 23:31:36', '0000-00-00 00:00:00', '25', 'order', ''),
 (42, '1', 14850, 150, '2013-04-06 01:21:45', '2013-04-06 01:21:45', '0000-00-00 00:00:00', '33', 'order', ''),
-(43, '1', 14850, 150, '2013-04-06 01:28:41', '2013-04-06 01:28:41', '0000-00-00 00:00:00', '34', 'order', '');
+(43, '1', 14850, 150, '2013-04-06 01:28:41', '2013-04-06 01:28:41', '0000-00-00 00:00:00', '34', 'order', ''),
+(44, 'nieuw', 0, 888, '2013-04-13 00:17:54', '2013-04-13 00:17:54', '0000-00-00 00:00:00', '', 'order', ''),
+(45, 'nieuw', 6752, 422, '2013-04-13 00:28:50', '2013-04-13 00:28:50', '0000-00-00 00:00:00', '', 'order', ''),
+(46, 'nieuw', 6752, 422, '2013-04-13 01:49:03', '2013-04-13 01:49:03', '0000-00-00 00:00:00', '', 'order', ''),
+(47, 'nieuw', 3000, 200, '2013-04-13 02:04:34', '2013-04-13 02:04:34', '0000-00-00 00:00:00', '', 'order', ''),
+(48, 'nieuw', 2550, 150, '2013-04-13 02:50:04', '2013-04-13 02:50:04', '0000-00-00 00:00:00', '56', 'order', ''),
+(49, 'nieuw', 8880, 555, '2013-04-13 04:21:32', '2013-04-13 04:21:32', '0000-00-00 00:00:00', '57', 'order', '');
 
 -- --------------------------------------------------------
 
