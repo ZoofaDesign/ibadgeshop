@@ -1,19 +1,10 @@
-<div class="span3">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Bestelling aanpassen'), array('action' => 'edit', $order['Order']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Verwijder Bestelling'), array('action' => 'delete', $order['Order']['id']), null, __('Are you sure you want to delete # %s?', $order['Order']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('Alle bestellingen'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('Nieuwe Bestelling'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('Alle Klanten'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('Nieuwe Klant'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
-<div class="span9">
+<div class="span4">
 <h2><?php  echo __('Bestelling'); ?></h2>
 
 		<?php echo "Bestelling ".$order['Order']['id'];?>
-                   <img src="<?php echo '/files/design/image/'.$order['Design'][0]['dir'].'/'.$order['Design'][0]['image']; ?>" />
+                <a href="#" class="thumbnail">
+                    <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="<?php echo '/files/design/image/'.$order['Design'][0]['dir'].'/'.$order['Design'][0]['image']; ?>">
+                </a>
                     <br>
                         Prijs: <?php echo $order['Order']['price']; ?>
                         <br>
@@ -34,7 +25,19 @@
       echo h($order['Customer']['btw_nr']);
   }?>
 </address>
-<?php echo $this->Html->link("Bestelling ".$order['Order']['id'], array('controller' => 'orders', 'action' => 'view', $order['Order']['id'])); ?>
+                        <form method="POST" action="url of MPI" >
+Please Click ‘Submit’ to pay your order.
+<input type="hidden" name="Uid" value="1234567890">
+<input type="hidden" name="Orderid" value="1122334455">
+<input type="hidden" name="Amount" value="1500">
+<input type="hidden" name="Description" value="your good" >
+<input type="hidden" name="Hash" 
+value="AEBA4E90E65740A3DC33C32179AC1B431F673BDF">
+<input type="hidden" name="Beneficiary" value="Shopname">
+<input type="hidden" name="Chname" value="Jesse James">
+<input type="submit" name="submit">
+</form>
+<?php echo $this->Html->link("Betaal", array('controller' => 'orders', 'action' => 'betaal',$order['Order']['id']), array('class' => 'btn')); ?>
 
 </div>
 

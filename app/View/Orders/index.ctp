@@ -13,7 +13,9 @@
         <?php foreach ($orders as $order): ?>
             <li class="span4">
                 <div class="thumbnail">
-                    <img data-src="holder.js/300x200" alt="">
+                    <a href="#" class="thumbnail">
+                    <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="<?php echo '/files/design/image/'.$order['Design'][0]['dir'].'/'.$order['Design'][0]['image']; ?>">
+                </a>
                     <div class="caption">
                         <h3>Bestelling <?php echo $order['Order']['id'] ?></h3>
                         <p>Status: <?php echo h($order['Order']['status']); ?><br>

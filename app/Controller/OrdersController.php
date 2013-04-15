@@ -25,7 +25,7 @@ class OrdersController extends AppController {
     public function index()
     {
         $this->Order->recursive = 1;
-        $this->set('orders', $this->Order->find('all',array('conditions' => array('Order.status' => 1,'Order.type' => 'order'))));
+        $this->set('orders', $this->Order->find('all',array('conditions' => array('Order.status' => 'nieuw','Order.type' => 'order'))));
     }
 
     public function dashboard()
@@ -70,8 +70,7 @@ class OrdersController extends AppController {
                 $this->request->data['Design']['size'] = $size;
                 $this->request->data['Order']['price'] = $prijs;
                 $this->request->data['Order']['type'] = 'order';
-               // $this->request->data['Order']['aantal'] = $customer['Order']['aantal'];
-               // $this->request->data['Design']['format'] = $customer['Design']['format'];
+
                 $this->request->data['Order']['customer_id'] = $customer['Customer']['klant_id'];
 
                 if ($this->Order->save($this->request->data))
@@ -93,6 +92,7 @@ class OrdersController extends AppController {
     
     public function bestel_staal($param)
     {
+        $this->layout = 'bestel';
         $size = 0;
                 if ($customer['Design']['diameter'] === '')
                 {
@@ -126,6 +126,7 @@ class OrdersController extends AppController {
 
     public function checkout($id = null)
     {
+        $this->layout = 'bestel';
         //Tonen van order gegevens
         if (!$this->Order->exists($id))
         {
@@ -137,8 +138,9 @@ class OrdersController extends AppController {
         
     }
 
-    public function betaal()
+    public function betaling($id)
     {
+        $this->layout = 'bestel';
         $storename = 'Ibadge';
         $order_id = 'o'.$this->Order->id .'c'. $this->Order->Customer->klant_id;
         $amount = $this->Order->aantal;
@@ -148,7 +150,7 @@ class OrdersController extends AppController {
                 $order_id .
                 $amount .
                 $description .
-                'S058762115'
+                'C058761500'
         );
         $ip = $_SERVER['REMOTE_ADDR'];
         if (isset($_SERVER['HTTP_X_FORWARDED_FOR']))
@@ -156,7 +158,7 @@ class OrdersController extends AppController {
             $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
         }
         //REDIRECT URL TOEVOEGEN -> NA BETALING WHERE TO GO
-        $redirecturl = 'http://ibadge.local/orders/';
+        $redirecturl = 'http://ibadge.local/orders/betaling_response';
         $request = '<?xml version="1.0" encoding="UTF-8"?>
 <MPI_Interface>
 <Authorize>
@@ -183,7 +185,7 @@ Copyright © Europabank NV 2011
 </MPI_Interface>';
         // post request and get reply
 
-        $xmlurl = $this->xmlPost('https://www.ebonline.be/(test/)mpi/authenticate', $request);
+        $xmlurl = $this->xmlPost('https://www.ebonline.be/test/mpi/authenticate', $request);
         if (!$xmlurl)
             return false;
         if (!$xml = simplexml_load_string($xmlurl))
@@ -341,20 +343,10 @@ Copyright © Europabank NV 2011
         $this->set('orders', $this->Order->find('all', $options));
     }
 
-    public function betaling()
-    {
-        
-    }
-
-    public function gelukt()
-    {
-        
-    }
-
     public function nieuw()
     {
         $this->Order->recursive = 1;
-        $this->set('orders', $this->Order->find('all',array('conditions' => array('Order.status' => 1,'Order.type' => 'order'))));
+        $this->set('orders', $this->Order->find('all',array('conditions' => array('Order.status' => 'nieuw','Order.type' => 'order'))));
     }
 
     public function producing()
